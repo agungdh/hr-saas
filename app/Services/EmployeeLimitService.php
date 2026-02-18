@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Employee;
 use App\Models\Tenant;
-use Stancl\Tenancy\Facades\Tenancy;
 
 class EmployeeLimitService
 {
@@ -15,7 +14,7 @@ class EmployeeLimitService
      */
     public function getLimit(): int
     {
-        $tenant = Tenancy::getTenant();
+        $tenant = tenant();
 
         if ($tenant === null) {
             return PHP_INT_MAX;
@@ -62,7 +61,7 @@ class EmployeeLimitService
      */
     public function getPlanLimitInfo(): array
     {
-        $tenant = Tenancy::getTenant();
+        $tenant = tenant();
         $currentCount = $this->getCurrentCount();
         $limit = $this->getLimit();
 
