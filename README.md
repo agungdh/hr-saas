@@ -121,6 +121,35 @@ Format frontend code:
 npm run format
 ```
 
+## Default Credentials
+
+After running the seeders (`php artisan db:seed`), the following users are available:
+
+### Super Admin (Central Domain)
+| URL | Email | Password |
+|-----|-------|----------|
+| `http://hr-saas.test:8000` | `admin@hr-saas.test` | `password` |
+
+### Demo Tenants
+
+**Acme Corporation** (Pro Plan)
+| URL | Email | Password | Role |
+|-----|-------|----------|------|
+| `http://acme.hr-saas.test:8000` | `john@acme.test` | `password` | Admin |
+| `http://acme.hr-saas.test:8000` | `jane@acme.test` | `password` | Manager |
+| `http://acme.hr-saas.test:8000` | `bob@acme.test` | `password` | Employee |
+
+**Startup XYZ** (Free Plan)
+| URL | Email | Password | Role |
+|-----|-------|----------|------|
+| `http://startup.hr-saas.test:8000` | `alice@startup.test` | `password` | Admin |
+| `http://startup.hr-saas.test:8000` | `charlie@startup.test` | `password` | Employee |
+
+> **Note:** Add the tenant subdomains to your hosts file:
+> ```bash
+> 127.0.0.1 acme.hr-saas.test startup.hr-saas.test
+> ```
+
 ## Environment Variables
 
 | Variable | Description |
