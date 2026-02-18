@@ -26,7 +26,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: '8.5'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
       - name: Install Dependencies
         run: |
@@ -34,7 +39,7 @@ jobs:
           npm install
 
       - name: Run Pint
-        run: composer lint
+        run: vendor/bin/pint --format agent
 
       - name: Format Frontend
         run: npm run format
@@ -42,8 +47,8 @@ jobs:
       - name: Lint Frontend
         run: npm run lint
 
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v7
-      #   with:
-      #     commit_message: fix code style
-      #     commit_options: '--no-verify'
+      - name: List Routes
+        run: php artisan route:list
+
+      - name: Optimize
+        run: php artisan optimize
