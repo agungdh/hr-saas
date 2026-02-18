@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([
     'web',
-    \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
 ])->group(function (): void {
     // Tenant routes will be added here
     // For now, we don't have a root route for tenants
