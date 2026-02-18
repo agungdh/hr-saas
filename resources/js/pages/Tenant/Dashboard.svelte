@@ -137,14 +137,20 @@
                     <CardTitle>Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent class="flex flex-wrap gap-2">
-                    <Button variant="outline" href="/employees/create" as={Link}>
-                        Add Employee
+                    <Button variant="outline" asChild>
+                        {#snippet children(props)}
+                            <Link {...props} href="/employees/create">Add Employee</Link>
+                        {/snippet}
                     </Button>
-                    <Button variant="outline" href="/leave/create" as={Link}>
-                        Request Leave
+                    <Button variant="outline" asChild>
+                        {#snippet children(props)}
+                            <Link {...props} href="/leave/create">Request Leave</Link>
+                        {/snippet}
                     </Button>
-                    <Button variant="outline" href="/payroll" as={Link}>
-                        Manage Payroll
+                    <Button variant="outline" asChild>
+                        {#snippet children(props)}
+                            <Link {...props} href="/payroll">Manage Payroll</Link>
+                        {/snippet}
                     </Button>
                 </CardContent>
             </Card>

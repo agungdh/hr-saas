@@ -91,7 +91,11 @@
                 <h1 class="text-2xl font-semibold tracking-tight">Leave Management</h1>
                 <p class="text-sm text-muted-foreground">Manage employee leave requests</p>
             </div>
-            <Button href="/leave/create" as={Link}>Request Leave</Button>
+            <Button asChild>
+                {#snippet children(props)}
+                    <Link {...props} href="/leave/create">Request Leave</Link>
+                {/snippet}
+            </Button>
         </div>
 
         {#if flash?.success}

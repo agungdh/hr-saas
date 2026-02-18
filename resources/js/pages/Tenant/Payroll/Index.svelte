@@ -159,12 +159,16 @@
                                 </td>
                                 <td class="px-4 py-3 text-right">
                                     {#if period.is_processed}
-                                        <Button variant="outline" size="sm" href="/payroll/{period.id}" as={Link}>
-                                            View Details
+                                        <Button variant="outline" size="sm" asChild>
+                                            {#snippet children(props)}
+                                                <Link {...props} href="/payroll/{period.id}">View Details</Link>
+                                            {/snippet}
                                         </Button>
                                     {:else}
-                                        <Button size="sm" href="/payroll/{period.id}" as={Link}>
-                                            Process
+                                        <Button size="sm" asChild>
+                                            {#snippet children(props)}
+                                                <Link {...props} href="/payroll/{period.id}">Process</Link>
+                                            {/snippet}
                                         </Button>
                                     {/if}
                                 </td>

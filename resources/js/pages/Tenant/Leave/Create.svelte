@@ -135,7 +135,11 @@
                             Submit Request
                         {/if}
                     </Button>
-                    <Button variant="outline" href="/leave" as={Link}>Cancel</Button>
+                    <Button variant="outline" asChild>
+                    {#snippet children(props)}
+                        <Link {...props} href="/leave">Cancel</Link>
+                    {/snippet}
+                </Button>
                 </div>
             </form>
 

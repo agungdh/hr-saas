@@ -154,7 +154,11 @@
                         Add Employee
                     {/if}
                 </Button>
-                <Button variant="outline" href="/employees" as={Link}>Cancel</Button>
+                <Button variant="outline" asChild>
+                    {#snippet children(props)}
+                        <Link {...props} href="/employees">Cancel</Link>
+                    {/snippet}
+                </Button>
             </div>
         </form>
     </div>

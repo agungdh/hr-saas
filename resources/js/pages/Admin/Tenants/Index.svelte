@@ -47,7 +47,11 @@
                 <h1 class="text-2xl font-semibold tracking-tight">Tenants</h1>
                 <p class="text-sm text-muted-foreground">Manage your SaaS tenants</p>
             </div>
-            <Button href="/admin/tenants/create" as={Link}>Create Tenant</Button>
+            <Button asChild>
+                {#snippet children(props)}
+                    <Link {...props} href="/admin/tenants/create">Create Tenant</Link>
+                {/snippet}
+            </Button>
         </div>
 
         {#if flash?.success}

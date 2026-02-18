@@ -80,7 +80,11 @@
                         Save Changes
                     {/if}
                 </Button>
-                <Button variant="outline" href="/departments" as={Link}>Cancel</Button>
+                <Button variant="outline" asChild>
+                    {#snippet children(props)}
+                        <Link {...props} href="/departments">Cancel</Link>
+                    {/snippet}
+                </Button>
             </div>
         </form>
     </div>

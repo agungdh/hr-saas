@@ -68,7 +68,11 @@
                 <h1 class="text-2xl font-semibold tracking-tight">{getMonthName(period.month)} {period.year}</h1>
                 <p class="text-sm text-muted-foreground">Payroll details for this period</p>
             </div>
-            <Button variant="outline" href="/payroll" as={Link}>Back to Payroll</Button>
+            <Button variant="outline" asChild>
+                {#snippet children(props)}
+                    <Link {...props} href="/payroll">Back to Payroll</Link>
+                {/snippet}
+            </Button>
         </div>
 
         <!-- Stats Cards -->

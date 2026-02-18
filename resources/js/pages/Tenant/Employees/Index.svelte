@@ -77,8 +77,10 @@
                     {limitInfo.current_count} {#if limitInfo.is_unlimited}employees{:else}of {limitInfo.limit}{/if} employees
                 </p>
             </div>
-            <Button href="/employees/create" as={Link} disabled={!limitInfo.can_add_more}>
-                Add Employee
+            <Button asChild disabled={!limitInfo.can_add_more}>
+                {#snippet children(props)}
+                    <Link {...props} href="/employees/create">Add Employee</Link>
+                {/snippet}
             </Button>
         </div>
 

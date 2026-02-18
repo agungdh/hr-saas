@@ -49,7 +49,11 @@
                 <h1 class="text-2xl font-semibold tracking-tight">Departments</h1>
                 <p class="text-sm text-muted-foreground">Manage your departments</p>
             </div>
-            <Button href="/departments/create" as={Link}>Create Department</Button>
+            <Button asChild>
+                {#snippet children(props)}
+                    <Link {...props} href="/departments/create">Create Department</Link>
+                {/snippet}
+            </Button>
         </div>
 
         {#if flash?.success}
