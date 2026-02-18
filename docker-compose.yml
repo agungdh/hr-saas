@@ -1,0 +1,67 @@
+services:
+    valkey:
+        image: valkey/valkey:latest
+        ports:
+            - 127.0.0.1:6379:6379
+        restart: unless-stopped
+
+    postgres:
+        image: postgres:18
+        ports:
+            - 127.0.0.1:5432:5432
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: admin
+            POSTGRES_DB: hr_saas
+        volumes:
+            - postgres_data:/var/lib/postgresql
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U admin"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    pgadmin:
+        image: dpage/pgadmin4:latest
+        ports:
+            - 127.0.0.1:5050:80
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@example.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+        volumes:
+            - pgadmin_data:/var/lib/pgadmin
+        restart: unless-stopped
+        depends_on:
+            - postgres
+
+    adminer:
+        image: adminer:latest
+        ports:
+            - 127.0.0.1:8083:8080
+        restart: unless-stopped
+        depends_on:
+            - postgres
+
+    seaweedfs:
+        image: chrislusf/seaweedfs:latest
+        ports:
+            - 127.0.0.1:8333:8333
+            - 127.0.0.1:8888:8888
+            - 127.0.0.1:9333:9333
+        command: ["server", "-dir=/data"]
+        volumes:
+            - seaweedfs_data:/data
+        restart: unless-stopped
+
+    mailpit:
+        image: axllent/mailpit:latest
+        ports:
+            - 127.0.0.1:8025:8025
+            - 127.0.0.1:1025:1025
+        restart: unless-stopped
+
+volumes:
+    postgres_data:
+    pgadmin_data:
+    seaweedfs_data:
