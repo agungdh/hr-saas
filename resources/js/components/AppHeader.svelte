@@ -39,7 +39,7 @@
     import { getInitials } from '@/lib/initials';
     import { toUrl } from '@/lib/utils';
     import type { BreadcrumbItem, NavItem } from '@/types';
-    import { dashboard } from '@/routes';
+    import { home } from '@/routes';
 
     let {
         breadcrumbs = [],
@@ -55,7 +55,7 @@
     const mainNavItems: NavItem[] = [
         {
             title: 'Dashboard',
-            href: dashboard(),
+            href: home(),
             icon: LayoutGrid,
         },
     ];
@@ -132,7 +132,7 @@
                 </Sheet>
             </div>
 
-            <Link href={toUrl(dashboard())} class="flex items-center gap-x-2">
+            <Link href={toUrl(home())} class="flex items-center gap-x-2">
                 <AppLogo />
             </Link>
 

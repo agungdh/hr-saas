@@ -19,7 +19,7 @@
     } from '@/components/ui/sidebar';
     import { toUrl } from '@/lib/utils';
     import type { NavItem } from '@/types';
-    import { dashboard } from '@/routes';
+    import { home } from '@/routes';
 
     let {
         children,
@@ -30,7 +30,7 @@
     const mainNavItems: NavItem[] = [
         {
             title: 'Dashboard',
-            href: dashboard(),
+            href: home(),
             icon: LayoutGrid,
         },
     ];
@@ -55,7 +55,7 @@
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" asChild>
                         {#snippet children(props)}
-                            <Link {...props} href={toUrl(dashboard())} class={props.class}>
+                            <Link {...props} href={toUrl(home())} class={props.class}>
                                 <AppLogo />
                             </Link>
                         {/snippet}
