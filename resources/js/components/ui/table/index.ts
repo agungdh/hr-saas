@@ -7,3 +7,4 @@ export { default as TableHead } from './TableHead.svelte';
 export { default as TableCell } from './TableCell.svelte';
 export { default as TableCaption } from './TableCaption.svelte';
 export { default as DataTable } from './DataTable.svelte';
+export { default as DataTableServer } from './DataTableServer.svelte';

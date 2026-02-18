@@ -19,4 +19,8 @@ Route::get('table-demo', [EmployeeController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('table-demo');
 
+Route::get('api/employees', [EmployeeController::class, 'data'])
+    ->middleware(['auth', 'verified'])
+    ->name('employees.data');
+
 require __DIR__.'/settings.php';

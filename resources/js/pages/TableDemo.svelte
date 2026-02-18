@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
-    import { DataTable } from '@/components/ui/table';
+    import { DataTableServer } from '@/components/ui/table';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import type { BreadcrumbItem } from '@/types';
 
@@ -22,8 +22,6 @@
             href: '/table-demo',
         },
     ];
-
-    let employees = $derived($page.props.employees as Employee[]);
 
     // Column definitions
     const columns = [
@@ -59,7 +57,7 @@
     ];
 </script>
 
-<AppHead title="Table Demo - DataTable" />
+<AppHead title="Table Demo - Server-Side DataTable" />
 
 <AppLayout {breadcrumbs}>
     <div class="flex h-full flex-1 flex-col gap-4 p-4">
@@ -67,16 +65,17 @@
             <div>
                 <h1 class="text-2xl font-bold">Employee Directory</h1>
                 <p class="text-muted-foreground">
-                    A custom DataTable component with Svelte 5 runes (server-side data)
+                    Server-side DataTable with search, sort, and pagination - optimized for 1B+ records
                 </p>
             </div>
         </div>
 
         <div class="rounded-xl border border-sidebar-border/70 p-6 dark:border-sidebar-border">
-            <DataTable
+            <DataTableServer
                 {columns}
-                data={employees}
-                pageSize={5}
+                endpoint="/api/employees"
+                pageSize={10}
+                searchPlaceholder="Search by name, email, department, position..."
             />
         </div>
 
@@ -84,19 +83,28 @@
             <h2 class="mb-4 text-lg font-semibold">Features</h2>
             <ul class="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
                 <li class="flex items-center gap-2">
-                    <span class="text-primary">✓</span> Server-side data
+                    <span class="text-primary">✓</span> Server-side search
                 </li>
                 <li class="flex items-center gap-2">
-                    <span class="text-primary">✓</span> Column sorting
+                    <span class="text-primary">✓</span> Server-side sorting
                 </li>
                 <li class="flex items-center gap-2">
-                    <span class="text-primary">✓</span> Pagination
+                    <span class="text-primary">✓</span> Server-side pagination
                 </li>
                 <li class="flex items-center gap-2">
-                    <span class="text-primary">✓</span> TypeScript generics
+                    <span class="text-primary">✓</span> Database indexes
                 </li>
                 <li class="flex items-center gap-2">
-                    <span class="text-primary">✓</span> Tailwind CSS styling
+                    <span class="text-primary">✓</span> Debounced search
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-primary">✓</span> Loading states
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-primary">✓</span> Error handling
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-primary">✓</span> 1B+ records ready
                 </li>
                 <li class="flex items-center gap-2">
                     <span class="text-primary">✓</span> Svelte 5 runes
