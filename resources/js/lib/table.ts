@@ -61,10 +61,7 @@ export function valueToLabel(value: string, options: FilterOption[]): string {
     return options.find((opt) => opt.value === value)?.label || value;
 }
 
-export function filterRows<T>(
-    rows: T[],
-    filters: ColumnFiltersState,
-): T[] {
+export function filterRows<T>(rows: T[], filters: ColumnFiltersState): T[] {
     let filtered = rows;
 
     for (const filter of filters) {
@@ -74,12 +71,16 @@ export function filterRows<T>(
         filtered = filtered.filter((row) => {
             const rowValue = (row as Record<string, unknown>)[id];
             if (typeof rowValue === 'string') {
-                return rowValue.toLowerCase().includes(String(value).toLowerCase());
+                return rowValue
+                    .toLowerCase()
+                    .includes(String(value).toLowerCase());
             }
             if (typeof rowValue === 'number') {
                 return rowValue === Number(value);
             }
-            return String(rowValue).toLowerCase().includes(String(value).toLowerCase());
+            return String(rowValue)
+                .toLowerCase()
+                .includes(String(value).toLowerCase());
         });
     }
 
@@ -113,18 +114,13 @@ export function sortRows<T>(rows: T[], sorting: SortingState): T[] {
     });
 }
 
-export function paginateRows<T>(
-    rows: T[],
-    pagination: PaginationState,
-): T[] {
+export function paginateRows<T>(rows: T[], pagination: PaginationState): T[] {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;
     return rows.slice(start, end);
 }
 
-export function createTableState<T>(
-    config: TableConfig<T>,
-): TableState {
+export function createTableState<T>(config: TableConfig<T>): TableState {
     return {
         sorting: config.initialState?.sorting ?? [],
         columnFilters: config.initialState?.columnFilters ?? [],
