@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
-            $table->string('email');
-            $table->string('department');
+            $table->string('email')->unique();
             $table->string('position');
             $table->enum('status', ['active', 'inactive', 'on-leave'])->default('active');
-            $table->unsignedInteger('salary');
+            $table->unsignedBigInteger('base_salary')->default(0);
             $table->date('start_date');
             $table->timestamps();
+
+            $table->index(['department_id', 'status']);
+            $table->index('email');
         });
     }
 

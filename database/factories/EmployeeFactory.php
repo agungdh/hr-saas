@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,13 +18,33 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
+            'department_id' => Department::factory(),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'department' => fake()->randomElement(['Engineering', 'Marketing', 'HR', 'Finance', 'Sales', 'Operations', 'Design']),
             'position' => fake()->jobTitle(),
             'status' => fake()->randomElement(['active', 'inactive', 'on-leave']),
-            'salary' => fake()->numberBetween(50000, 150000),
-            'start_date' => fake()->date(),
+            'base_salary' => fake()->numberBetween(5000000, 50000000),
+            'start_date' => fake()->date('-2 years'),
         ];
+    }
+
+    /**
+     * Indicate that the employee is active.
+     */
+    public function active(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'active',
+        ]);
+    }
+
+    /**
+     * Indicate that the employee has no department.
+     */
+    public function withoutDepartment(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'department_id' => null,
+        ]);
     }
 }
