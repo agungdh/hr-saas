@@ -108,15 +108,14 @@
         }
     }
 
-    // Fetch data on mount
+    // Fetch data on mount and when dependencies change
     $effect(() => {
+        // Track reactive dependencies
+        const page = currentPage;
+        const col = sortColumn;
+        const dir = sortDirection;
         fetchData();
     });
-
-    // Refetch when dependencies change
-    $effect(() => {
-        fetchData();
-    }, [currentPage, sortColumn, sortDirection]);
 
     // Debounced search
     function handleSearchInput(value: string): void {
